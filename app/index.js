@@ -18,9 +18,7 @@ const Splash = () => {
 
             <Button title="Sign Up" onPress={() => router.push('/(auth)/signup/signup')}/>
 
-            <Pressable hitSlop={20}>
-                <Text style={styles.footerText} >Sign In</Text>
-            </Pressable>
+            <Button style={styles.footerText} title="Sign In" onPress={() => router.push('/(auth)/singin/signin')}/>
         </View>
     )
 }

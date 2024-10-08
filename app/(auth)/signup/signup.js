@@ -6,6 +6,7 @@ import Checkbox from '@/components/Checkbox'
 import Input from '@/components/Input'
 import Button from '@/components/Button'
 import Separator from '@/components/Separator'
+import GoogleLogin from '@/components/GoogleLogin'
 
 
 const signup = () => {
@@ -23,6 +24,7 @@ const signup = () => {
       </View>
       <Button style={styles.button} title="Sign Up" />
       <Separator text="Or sign in with"/>
+      <GoogleLogin />
       <Text style={styles.footerText}>Already have an account? <Text style={styles.footerLink}>Sign In</Text></Text>
     </View>
  
