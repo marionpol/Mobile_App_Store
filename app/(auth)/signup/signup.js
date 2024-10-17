@@ -7,13 +7,46 @@ import Input from '@/components/Input'
 import Button from '@/components/Button'
 import Separator from '@/components/Separator'
 import GoogleLogin from '@/components/GoogleLogin'
-
+import { router } from 'expo-router'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const signup = () => {
-  const [checked, setChecked] = useState(false)
+
+  const { setUser, setIsLoggedIn } = useGlobalContext();
+  const [isSubmitting, setSubmitting] = useState(false)
+
+  const [form, setForm] = useState({
+    username: '',
+    email: '',
+    password: ''
+  })
+
+
+const router = useRouter();
+
+const Submit = async () => {
+  if (form.username === "" || form.email === "" || form.password === ""){
+    Alert.alert('Error', 'Please fill in all of the fields')
+  }
+
+  setSubmitting(true);
+
+  try {
+    const result = await createUser(form.email, form.password, form.username)
+    setUser(result);
+    setIsLoggedIn(true);
+   
+    router.replace('/home')
+  } catch (error) {
+      Alert.alert('Error', error.message)
+  } finally{
+      setSubmitting(false)
+  }
+}
   return (
+    <SafeAreaView>
     <View style={styles.container}>
-      <AuthHeader title="Sign Up"/>
+      <AuthHeader title="Sign Up" onPress={() => router.back('./app')}/>
       <Input label="Name" placeholder="John Doe"/>
       <Input label="Email" placeholder="example@gmail.com"/>
       <Input isPassword label="Password" placeholder="*****"/>
@@ -25,9 +58,9 @@ const signup = () => {
       <Button style={styles.button} title="Sign Up" />
       <Separator text="Or sign in with"/>
       <GoogleLogin />
-      <Text style={styles.footerText}>Already have an account? <Text style={styles.footerLink}>Sign In</Text></Text>
+      <Text style={styles.footerText}>Already have an account? <Text style={styles.footerLink} onPress={() => router.push('/(auth)/singin/signin')}>Sign In</Text></Text>
     </View>
- 
+ </SafeAreaView>
 )
 }
 
