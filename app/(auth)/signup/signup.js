@@ -12,7 +12,6 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 const signup = () => {
   const [checked, setChecked] = useState(false)
-
   return (
     <SafeAreaView>
     <View style={styles.container}>
