@@ -1,7 +1,7 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context";
-import {styles} from "./pstyles"
+import { styles } from "./styles";
 
 const Profile = () => {
     return (
