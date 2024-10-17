@@ -11,38 +11,8 @@ import { router } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 const signup = () => {
+  const [checked, setChecked] = useState(false)
 
-  const { setUser, setIsLoggedIn } = useGlobalContext();
-  const [isSubmitting, setSubmitting] = useState(false)
-
-  const [form, setForm] = useState({
-    username: '',
-    email: '',
-    password: ''
-  })
-
-
-const router = useRouter();
-
-const Submit = async () => {
-  if (form.username === "" || form.email === "" || form.password === ""){
-    Alert.alert('Error', 'Please fill in all of the fields')
-  }
-
-  setSubmitting(true);
-
-  try {
-    const result = await createUser(form.email, form.password, form.username)
-    setUser(result);
-    setIsLoggedIn(true);
-   
-    router.replace('/home')
-  } catch (error) {
-      Alert.alert('Error', error.message)
-  } finally{
-      setSubmitting(false)
-  }
-}
   return (
     <SafeAreaView>
     <View style={styles.container}>
