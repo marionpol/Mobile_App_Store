@@ -5,10 +5,10 @@ export const styles = StyleSheet.create({
     container: {
         padding: 24,
         flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
+
         height: "100%",
-        borderWidth: 0
+        borderWidth: 0,
+        backgroundColor: Colors.white
     },
     image: {
         width: '100%',
@@ -33,5 +33,8 @@ export const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "bold",
         marginTop: 30
+    },
+    list: {
+        paddingVertical: 24
     }
 })
