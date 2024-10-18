@@ -5,10 +5,10 @@ export const styles = StyleSheet.create({
     container: {
         padding: 24,
         flexDirection: "column",
-
         height: "100%",
         borderWidth: 0,
         backgroundColor: Colors.white
+
     },
     image: {
         width: '100%',
