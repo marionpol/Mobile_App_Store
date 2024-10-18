@@ -7,7 +7,8 @@ export const styles = StyleSheet.create({
         marginHorizontal: 8,
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        margin: 25
     },
     title:{
         color: Colors.grey
