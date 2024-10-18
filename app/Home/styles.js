@@ -33,10 +33,8 @@ export const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "bold",
         marginTop: 30
-
     },
     list: {
         paddingVertical: 24
-
     }
 })
