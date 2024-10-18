@@ -17,7 +17,9 @@ const Stack = createNativeStackNavigator()
 
 const Tab = createBottomTabNavigator()
 
+
 const isSignedin = true
+
 
 const Tabs = () => {
     return (

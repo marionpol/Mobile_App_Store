@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
         height: "100%",
         borderWidth: 0,
         backgroundColor: Colors.white
+
     },
     image: {
         width: '100%',
@@ -32,8 +33,10 @@ export const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "bold",
         marginTop: 30
+
     },
     list: {
         paddingVertical: 24
+
     }
 })
