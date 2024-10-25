@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     title: {
         color: Colors.black,
         fontSize: 16,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     },
     icon: {
         width: 24,
