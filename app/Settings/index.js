@@ -30,8 +30,8 @@ const Settings = () => {
 
     return (
         <SafeAreaView style={{flex: 1}}>
-            <Header title="Settings"/>
             <View style={styles.container}>
+                    <Header title="Settings"/>
                 <View style={styles.sectionHeader}>
                     <Text style={styles.sectionTitle}> Personal Information</Text>
                     <Pressable onPress={onEditPress}>
