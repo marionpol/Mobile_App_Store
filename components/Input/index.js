@@ -24,7 +24,9 @@ const Input = ({label, placeholder, isPassword, value, onChangeText, options, ty
         value ? (<Text style={[styles.placeholder, styles]}>{value?.title}</Text>) : (<Text style={[styles.placeholder, styles]}>{placeholder}</Text>)
       }
         
+
         <Image style={styles.arrow} source={require('@/assets/tabs/arrow.png')}/>
+
       </Pressable>
       ): (
       <View style={styles.inputContainer}>

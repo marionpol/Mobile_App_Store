@@ -11,6 +11,7 @@ const ListItem = ({title, subtitle, onPress, style}) => {
                 {!! subtitle ? (<Text style={styles.subtitle}>{subtitle}</Text>) : null}
             </View>
             <Image style={styles.arrow} source={require("@/assets/tabs/arrow.png")}/>
+
         </Pressable>
     )
 }

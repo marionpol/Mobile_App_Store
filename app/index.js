@@ -1,4 +1,6 @@
+
 import React, { useEffect, useState } from 'react'
+
 import { Image } from 'react-native'
 import Splash from './auth/splash'
 import Signup from './auth/singup/signup'
