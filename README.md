@@ -1,50 +1,37 @@
-# Welcome to your Expo app 👋
+React Native + Appwrite + Expo
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Mobile app where you can put up listings
 
-## Get started
+This is a mobile app which is made with React Native and Expo. It also uses appwrite databases for making accounts.
+In this app you can create an account, check listings, categorize them and also add your own listings.
 
 1. Install dependencies
 
    ```bash
    npm install
    ```
+   ```bash
+   npx create-expo-app@latest
+   ```
+
+   ### Check the package.json file for more dependecies
 
 2. Start the app
 
    ```bash
     npx expo start
    ```
+When the app starts use your phone to scan the QR code that is in the terminal (on IOS you can use your camera, on android you have to install the expo-go app and then scan the QR code).
 
-In the output, you'll find options to open the app in a
+3. Creating a database in appwrite
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+https://appwrite.io/ > create an account > create a project and choose whatever option you prefer (I used the web platform)
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Create a database with an account table which has the username, email and password attributes . Create a connection between the application and the database - creating the appwrite.js file in the appwrite folder and adding the necessary keys.
 
-## Get a fresh project
+4. Improvements
 
-When you're ready, run:
+Currently the google login doesnt function at all since I haven't found a viable solution for it to work properly.
 
-```bash
-npm run reset-project
-```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
