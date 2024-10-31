@@ -4,7 +4,6 @@ import {SafeAreaView} from 'react-native-safe-area-context'
 import Header from "@/components/Header";
 import {styles} from './styles'
 
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker'
 
 import * as ImagePicker from 'expo-image-picker';
 import Input from "@/components/Input";
@@ -64,7 +63,9 @@ const CreateListing = ({navigation}) => {
                     <View key={image?.fileName} style={styles.imageContainer} >
                     <Image style={styles.image} source={{uri: image?.uri}}/>
                     <Pressable hitSlop={20} onPress={() => onDeleteImage(image)}>
-                    <Image style={styles.delete} source={require('../../assets/images/close.png')} />
+
+                    <Image style={styles.delete} source={require('@/assets/images/close.png')} />
+
                     </Pressable>
                     </View>
                 ))}

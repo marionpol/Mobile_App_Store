@@ -2,7 +2,6 @@ import React from "react";
 import {Image, Pressable, Text, View} from 'react-native'
 import {styles} from "./styles"
 import Button from "@/components/Button"
-import { router } from 'expo-router'
 
 const Splash = ({navigation}) => {
 

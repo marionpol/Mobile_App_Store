@@ -1,4 +1,4 @@
-import { View, Text, Image, Pressable } from 'react-native'
+import { View, Text, Image, Pressable, Alert } from 'react-native'
 import React, {useState} from 'react'
 import AuthHeader from '@/components/AuthHeader'
 import styles  from './styles';
@@ -7,34 +7,47 @@ import Button from '@/components/Button'
 import Separator from '@/components/Separator'
 import GoogleLogin from '@/components/GoogleLogin';
 import { SafeAreaProvider } from "react-native-safe-area-context"
+import { signIn } from '@/appwrite/appwrite';
 
 
-const Signin = ({navigation}) => { 
-    const onBack = () =>  {
-        navigation.goBack()
+const Signin = ({ navigation }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onBack = () => {
+      navigation.goBack();
+  };
+
+  const onSignup = () => {
+      navigation.navigate('Signup');
+  };
+
+  const handleSignIn = async () => {
+    try {
+        await signIn(email, password);
+        navigation.navigate('Home'); 
+    } catch (error) {
+        Alert.alert('Error', error.message); 
     }
-
-    const onSignup = () => {
-      navigation.navigate('Signup')
-  }
+};
 
   return (
-
-  <SafeAreaProvider>
-    <View style={styles.container}>
-        <AuthHeader onBackPress={onBack} title="Sign In" />
-        <Input label="Email" placeholder="example@gmail.com" />
-        <Input isPassword label="Password" placeholder="******" />
-        <Button style={styles.button} title="Sign In" />
-        <Separator text="Or sign up with" />
-        <GoogleLogin />
-        <Text style={styles.footerText}>Don't have an account?
-            <Text onPress={onSignup} style={styles.footerLink}> Sign Up</Text>
-        </Text>
-    </View>
-  </SafeAreaProvider>
- 
-)
-}
+      <SafeAreaProvider>
+          <View style={styles.container}>
+              <AuthHeader onBackPress={onBack} title="Sign In" />
+              <Input label="Email" placeholder="example@gmail.com" value={email} onChangeText={setEmail} />
+              <Input isPassword label="Password" placeholder="******" value={password} onChangeText={setPassword} />
+              <Button style={styles.button} title="Sign In" onPress={handleSignIn} loading={isLoading} />
+              <Separator text="Or sign up with" />
+              <GoogleLogin />
+              <Text style={styles.footerText}>
+                  Don't have an account?
+                  <Text onPress={onSignup} style={styles.footerLink}> Sign Up</Text>
+              </Text>
+          </View>
+      </SafeAreaProvider>
+  );
+};
 
 export default Signin;

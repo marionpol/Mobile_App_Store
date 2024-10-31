@@ -35,7 +35,9 @@ const Settings = () => {
                 <View style={styles.sectionHeader}>
                     <Text style={styles.sectionTitle}> Personal Information</Text>
                     <Pressable onPress={onEditPress}>
-                    <Image style={styles.icon} source={require('../../assets/tabs/edit.png')} />
+
+                    <Image style={styles.icon} source={require('@/assets/tabs/edit.png')} />
+
                     </Pressable>
                 </View>
                 <EditableBox onChangeText={(v) => onChange('name ', v )} label="Name" value={values.name} editable={editing}/>

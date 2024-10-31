@@ -32,12 +32,12 @@ const ProductDetails = ({navigation, route}) => {
                     <Text style={styles.description}>{products?.description}</Text>
                 </View>
                 <Pressable onPress={onBackPress} style={styles.backContainer}>
-                    <Image style={styles.backIcon} source={require('../../assets/tabs/back.png')} />
+                    <Image style={styles.backIcon} source={require('@/assets/tabs/back.png')} />
                 </Pressable>
             </ScrollView>
             <View style={styles.footer}>
                 <Pressable style={styles.bookmarkContainer}>
-                    <Image style={styles.bookmarkIcon} source={require('../../assets/tabs/bookmark.png')
+                    <Image style={styles.bookmarkIcon} source={require('@/assets/tabs/bookmark.png')
                      } />
                 </Pressable>
                 <Button onPress={onContact} title="Contact Seller"/>
