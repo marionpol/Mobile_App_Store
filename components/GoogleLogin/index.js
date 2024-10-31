@@ -6,7 +6,7 @@ import styles from './styles'
 const GoogleLogin = () => {
   return (
     <TouchableOpacity activeOpacity={0.6} style={styles.container}>
-        <Image style={styles.image} source={require('../../assets/images/Google.png')} />
+        <Image style={styles.image} source={require('@/assets/images/Google.png')} />
     </TouchableOpacity>
   )
 }
