@@ -4,34 +4,20 @@ import { Colors } from '../../constants/colors'
 export const styles = StyleSheet.create({
     container: {
         padding: 24,
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100%",
-        borderWidth: 0
+        flex: 1
     },
-    image: {
-        width: '100%',
-        height: 200
+    name: {
+        fontSize: 20,
+        fontWeight:'bold',
+        color: Colors.black,
+        marginBottom: 5
     },
-    titleContainer: {
-        marginVertical: 54
+    email: {
+        fontSize: 14,
+        color: Colors.grey,
+        marginBottom: 5
     },
-    title: {
-        fontSize: 40,
-        fontWeight: "bold",
-        textAlign: "center"
-    },
-    innerTitle: {
-        color: Colors.orange,
-        textDecorationLine: 'underline',
-        textAlign: "center"
-    },
-    footerText: {
-        color: Colors.blue,
-        textAlign: "center",
-        fontSize: 16,
-        fontWeight: "bold",
-        marginTop: 30
+    content: {
+        flex: 1
     }
 })

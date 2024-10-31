@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { SafeAreaView, Image } from 'react-native'
+import React from 'react'
+import { Image } from 'react-native'
 import Splash from './auth/splash'
 import Signup from './auth/singup/signup'
 import Signin from './auth/signin/signin'
@@ -7,6 +7,8 @@ import Signin from './auth/signin/signin'
 import Profile from './Profile'
 import Home from './Home'
 import Favorites from './Favorites'
+import Settings from './Settings'
+import CreateListing from './CreateListing'
 
 import { Colors } from '../constants/colors'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -75,6 +77,8 @@ const App = () => {
                     <>
                         <Stack.Screen name="Tabs" component={Tabs} />
                         <Stack.Screen name="ProductDetails" component={ProductDetails} />
+                        <Stack.Screen name="Settings" component={Settings}/>
+                        <Stack.Screen name="CreateListing" component={CreateListing}/>
                     </>
                 ) : (
                     <>
