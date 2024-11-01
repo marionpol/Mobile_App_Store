@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text } from "react-native";
+import { View, Text, Alert } from "react-native";
 import AuthHeader from "@/components/AuthHeader";
 import Input from '@/components/Input';
 import Checkbox from '@/components/Checkbox';
@@ -8,9 +8,9 @@ import { styles } from './styles';
 import Separator from '@/components/Separator';
 import GoogleLogin from '@/components/GoogleLogin';
 import { SafeAreaProvider} from "react-native-safe-area-context"
-import { createUser } from '@/appwrite/appwrite';
+import { createUser, signIn } from '@/appwrite/appwrite';
 
-const Signup = ({ navigation }) => {
+const Signup = ({ navigation, setIsAuthenticated }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -29,17 +29,24 @@ const Signup = ({ navigation }) => {
             Alert.alert("Agreement Required", "Please agree to the Terms and Privacy policy.");
             return;
         }
-        
+
         try {
+
             const user = await createUser(email, password, name);
             if (user) {
                 Alert.alert("Signup Successful", "Welcome to the app!");
-                navigation.navigate('Home');
+                
+                const signInUser = await signIn(email, password); 
+                if (signInUser) {
+                    setIsAuthenticated(true); 
+                    navigation.navigate('Tabs'); 
+                }
             }
         } catch (error) {
             Alert.alert("Signup Failed", error.message || "An error occurred during signup.");
         }
     };
+    
 
     return (
     <SafeAreaProvider>

@@ -29,41 +29,33 @@ const databases = new Databases(client);
 
 const createUser = async (email, password, username) => {
     try {
-        const newAccount = await account.create(
-            ID.unique(),
-            email,
-            password,
-            username
-        )
-
-        if(!newAccount) throw Error;
-
-        await signIn(email, password)
+        const newAccount = await account.create(ID.unique(), email, password, username);
+        console.log("Account created:", newAccount);
 
         const newUser = await databases.createDocument(
             databaseId,
             userCollectionId,
             ID.unique(),
             {
-            accountId: newAccount.$id,
-            email: email,
-            username: username
+                accountId: newAccount.$id,
+                email: email,
+                username: username
             }
         );
+        console.log("User document created:", newUser); 
         return newUser;
     } catch (error) {
-        console.log(error);
+        console.error("Error during user creation:", error);
         throw new Error(error);
     }
-}
+};
 
 export const signIn = async (email, password) => {
     try {
-        const session = await account.createEmailPasswordSession(email, password)
-
-        return session;
+        const session = await account.createEmailPasswordSession(email, password);
+        return session; 
     } catch (error) {
-        throw new Error(error);
+        throw new Error(error.message || "Failed to sign in");
     }
 }
 
@@ -71,18 +63,24 @@ export const getCurrentUser = async () => {
     try {
         const currentAccount = await account.get();
 
-        if(!currentAccount) throw Error;
+        if (!currentAccount) throw new Error('No user account found.');
 
         const currentUser = await databases.listDocuments(databaseId, userCollectionId,
-        [Query.equal('accountId', currentAccount.$id)])
+            [Query.equal('accountId', currentAccount.$id)]);
 
-        if(!currentUser) throw Error;
+        if (currentUser.total === 0) {
+            throw new Error('No user document found.');
+        }
 
-        return currentUser.documents[0];
+        return currentUser.documents[0]; 
     } catch (error) {
-        console.log(error)
+        
+        console.log("Error fetching current user: ", error.message);
+        return null; 
     }
 }
+
+
 
 
 export const logOut = async () => {

@@ -10,7 +10,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context"
 import { signIn } from '@/appwrite/appwrite';
 
 
-const Signin = ({ navigation }) => {
+const Signin = ({ navigation, onSignInSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -24,11 +24,14 @@ const Signin = ({ navigation }) => {
   };
 
   const handleSignIn = async () => {
+    setIsLoading(true); 
     try {
         await signIn(email, password);
-        navigation.navigate('Home'); 
+        onSignInSuccess(); 
     } catch (error) {
-        Alert.alert('Error', error.message); 
+        Alert.alert('Error', error.message);
+    } finally {
+        setIsLoading(false); 
     }
 };
 

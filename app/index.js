@@ -1,30 +1,26 @@
+import React, { useEffect, useState } from 'react';
+import { Image } from 'react-native';
+import Splash from './auth/splash';
+import Signup from './auth/singup/signup';
+import Signin from './auth/signin/signin';
 
-import React, { useEffect, useState } from 'react'
+import Profile from './Profile';
+import Home from './Home';
+import Favorites from './Favorites';
+import Settings from './Settings';
+import CreateListing from './CreateListing';
 
-import { Image } from 'react-native'
-import Splash from './auth/splash'
-import Signup from './auth/singup/signup'
-import Signin from './auth/signin/signin'
+import { Colors } from '../constants/colors';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import ProductDetails from './ProductDetails';
+import { getCurrentUser } from '@/appwrite/appwrite';
 
-import Profile from './Profile'
-import Home from './Home'
-import Favorites from './Favorites'
-import Settings from './Settings'
-import CreateListing from './CreateListing'
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
-import { Colors } from '../constants/colors'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import ProductDetails from './ProductDetails'
-import { getCurrentUser } from '@/appwrite/appwrite'
-
-const Stack = createNativeStackNavigator()
-
-const Tab = createBottomTabNavigator()
-
-
-const Tabs = () => {
+const Tabs = ({ setIsAuthenticated }) => {
     return (
         <Tab.Navigator 
             screenOptions={({ route }) => ({
@@ -52,7 +48,9 @@ const Tabs = () => {
         >
             <Tab.Screen name="Home" component={Home} />
             <Tab.Screen name="Favorites" component={Favorites} />
-            <Tab.Screen name="Profile" component={Profile} />
+            <Tab.Screen name="Profile">
+                {(props) => <Profile {...props} setIsAuthenticated={setIsAuthenticated} />}
+            </Tab.Screen>
         </Tab.Navigator>
     );
 };
@@ -65,28 +63,18 @@ const App = () => {
         const checkAuthentication = async () => {
             try {
                 const user = await getCurrentUser();
-                setIsAuthenticated(!!user); 
-            } catch {
-                setIsAuthenticated(false); 
+                setIsAuthenticated(!!user);
+            } catch (error) {
+                console.log("Error fetching user: ", error);
+                setIsAuthenticated(false);
             }
         };
         checkAuthentication();
     }, []);
 
-
-    <Stack.Navigator>
-    {isAuthenticated ? (
-        <>
-            <Stack.Screen name="Tabs" component={Tabs} />
-        </>
-    ) : (
-        <>
-            <Stack.Screen name="Splash" component={Splash} />
-            <Stack.Screen name="Signup" component={Signup} />
-            <Stack.Screen name="Signin" component={Signin} />
-        </>
-    )}
-</Stack.Navigator>
+    const handleSignInSuccess = () => {
+        setIsAuthenticated(true); 
+    };
 
     return (
         <SafeAreaProvider>
@@ -94,20 +82,25 @@ const App = () => {
                 screenOptions={{
                     contentStyle: { backgroundColor: theme.colors.background },
                     headerShown: false 
-                }}
-            >
+                }}>
                 {isAuthenticated ? (
                     <>
-                        <Stack.Screen name="Tabs" component={Tabs} />
+                        <Stack.Screen name="Tabs">
+                            {(props) => <Tabs {...props} setIsAuthenticated={setIsAuthenticated} />}
+                        </Stack.Screen>
                         <Stack.Screen name="ProductDetails" component={ProductDetails} />
-                        <Stack.Screen name="Settings" component={Settings}/>
-                        <Stack.Screen name="CreateListing" component={CreateListing}/>
+                        <Stack.Screen name="Settings" component={Settings} />
+                        <Stack.Screen name="CreateListing" component={CreateListing} />
                     </>
                 ) : (
                     <>
                         <Stack.Screen name="Splash" component={Splash} />
-                        <Stack.Screen name="Signup" component={Signup} />
-                        <Stack.Screen name="Signin" component={Signin} />
+                        <Stack.Screen name="Signup">
+                        {(props) => <Signup {...props} setIsAuthenticated={setIsAuthenticated} />}
+                        </Stack.Screen>
+                        <Stack.Screen name="Signin">
+                            {(props) => <Signin {...props} onSignInSuccess={handleSignInSuccess} />}
+                        </Stack.Screen>
                     </>
                 )}
             </Stack.Navigator>
