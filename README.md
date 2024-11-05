@@ -8,6 +8,9 @@ In this app you can create an account, check listings, categorize them and also 
 1. Install dependencies
 
    ```bash
+   npm init -y
+   ```
+   ```bash
    npm install
    ```
    ```bash
