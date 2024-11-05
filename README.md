@@ -14,9 +14,14 @@ In this app you can create an account, check listings, categorize them and also 
    npm install
    ```
 
+   and if expo didn't install then use this as well
+   ```bash
+   npm install expo
+   ```
+
    ### Check the package.json file for more dependecies
 
-2. Start the app
+1. Start the app
 
    ```bash
     npx expo start
