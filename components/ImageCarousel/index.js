@@ -9,10 +9,10 @@ const ImageCarousel = ({ images }) => {
     const [activeIndex, setActiveIndex] = useState(0)
 
     const handleScrollEnd = (event) => {
-        const horizontalOffset = event.nativeEvent.contentOffset.x
-        const index = horizontalOffset / width
-        setActiveIndex(index)
-    }
+        const horizontalOffset = event.nativeEvent.contentOffset.x;
+        const index = Math.round(horizontalOffset / width);
+        setActiveIndex(index);
+    };
 
     const renderImage = ({item}) => {
         return (
@@ -21,7 +21,7 @@ const ImageCarousel = ({ images }) => {
     }
     return (
         <View>
-            <FlatList horizontal pagingEnabled style={styles.list} data={images} renderItem={renderImage} onMomentumScrollEnd={handleScrollEnd}/>
+            <FlatList horizontal pagingEnabled style={styles.list} data={images} renderItem={renderImage} onScroll={handleScrollEnd}/>
             <View style={styles.paggination}>
                 {images?.map((_, i) => (
                     <View key={i} style={[styles.pagginationLine, i === activeIndex ? styles.activeLine : {}]}/>

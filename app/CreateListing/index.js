@@ -15,7 +15,7 @@ const CreateListing = ({navigation}) => {
     const [loading, setLoading] = useState(false)
     const [values, setValues] = useState({})
 
-    const goBack = () => {
+    const onBackPress = () => {
         navigation.goBack()
     }
 
@@ -50,7 +50,7 @@ const CreateListing = ({navigation}) => {
     return (
         <SafeAreaView style={{flex: 1}}>
             <KeyboardAvoidingView behavior="position">
-            <Header showBack={true} onBackPress={goBack} title="Create a new listing" />
+            <Header showBack={true} onBackPress={onBackPress} title="Create a new listing" />
             <View style={styles.container}>
                 <Text style={styles.sectionTitle}>Upload photos</Text>
                 <View style={styles.imageRow}>

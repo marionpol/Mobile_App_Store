@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
         margin: 5
     },
     activeLine: {
-        backgroundColor: Colors.blacklack,
-        width: 30
+        backgroundColor: Colors.black,
+        width: 24
     }
 })
