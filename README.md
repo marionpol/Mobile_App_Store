@@ -13,9 +13,6 @@ In this app you can create an account, check listings, categorize them and also 
    ```bash
    npm install
    ```
-   ```bash
-   npx create-expo-app@latest
-   ```
 
    ### Check the package.json file for more dependecies
 
