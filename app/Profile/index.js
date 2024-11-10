@@ -41,7 +41,7 @@ const Profile = ({ navigation, setIsAuthenticated }) => {
     };
 
     return (
-        <SafeAreaView style={{flex: 1}}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
             <View style={styles.container}>
                 <View style={styles.content}>
                     <Header title="Profile" showLogout onLogout={onLogout} />

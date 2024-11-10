@@ -1,5 +1,6 @@
 import  { StyleSheet } from 'react-native'
 import { Colors } from '../../constants/colors'
+import CategoryBox from '@/components/CategoryBox'
 
 export const styles = StyleSheet.create({
     container: {
@@ -36,5 +37,11 @@ export const styles = StyleSheet.create({
     },
     list: {
         paddingVertical: 24
+    }, 
+    CategoryBox :{
+        categoryContainer: {
+            height: 80, 
+            justifyContent: "center",
+        },
     }
 })

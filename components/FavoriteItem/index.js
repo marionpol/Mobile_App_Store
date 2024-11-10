@@ -1,18 +1,21 @@
+// FavoriteItem.js
 import React from "react";
 import { Pressable, Image, Text, View } from "react-native";
-import { styles } from "./styles"
+import { styles } from "./styles";
 
-const FavoriteItem = ({title, image, price, onPress}) => {
-    return (
-        <Pressable onPress={onPress} style={styles.container}>
-            <Image style={styles.image} source={{uri: image}}/>
-            <View style={styles.content}>
-                <Text style={styles.title}>{title}</Text>
-                <Text style={styles.price}>{price}</Text>  
-            </View> 
-            <Image style={styles.icon} source={require('@/assets/images/close.png')}/>  
-        </Pressable>
-    )
-}
+const FavoriteItem = ({ title, image, price, onPress, onRemove }) => {
+  return (
+    <Pressable onPress={onPress} style={styles.container}>
+      <Image style={styles.image} source={{ uri: image }} />
+      <View style={styles.content}>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.price}>{price}</Text>
+      </View>
+      <Pressable onPress={onRemove}>
+        <Image style={styles.icon} source={require('@/assets/images/close.png')} />
+      </Pressable>
+    </Pressable>
+  );
+};
 
-export default React.memo(FavoriteItem)
+export default React.memo(FavoriteItem);
