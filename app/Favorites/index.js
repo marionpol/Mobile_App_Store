@@ -19,25 +19,24 @@ const Favorites = ({ navigation }) => {
 
   useEffect(() => {
     fetchFavorites(); 
-  }, [favorites]); 
+  }, [favorites]);  
   
   const removeFavorite = async (productId) => {
     const updatedFavorites = favorites.filter(item => item.id !== productId);
-    setFavorites(updatedFavorites);  // Update the state
-    await AsyncStorage.setItem('favorites', JSON.stringify(updatedFavorites)); // Persist to AsyncStorage
+    setFavorites(updatedFavorites);  
+    await AsyncStorage.setItem('favorites', JSON.stringify(updatedFavorites)); 
   };
 
-  // Render each favorite item
   const renderItem = ({ item }) => {
     const onProductPress = () => {
-      navigation.navigate('ProductDetails', { product: item });
+      navigation.navigate('ProductDetails', { products: item });
     };
 
     return (
       <FavoriteItem 
         {...item}
         onPress={onProductPress}
-        onRemove={() => removeFavorite(item.id)} // Remove from favorites
+        onRemove={() => removeFavorite(item.id)}
       />
     );
   };
@@ -47,7 +46,7 @@ const Favorites = ({ navigation }) => {
       <View style={styles.container}>
         <Header title="Favorites" />
         <FlatList
-          data={favorites} // Use the stateful `favorites` array here
+          data={favorites} 
           renderItem={renderItem}
           keyExtractor={(item) => String(item.id)}
         />

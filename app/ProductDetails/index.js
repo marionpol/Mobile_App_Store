@@ -7,11 +7,10 @@ import ImageCarousel from "@/components/ImageCarousel";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ProductDetails = ({ navigation, route }) => {
-  const { products } = route.params || {};  // Get the product from route params
-  const [isBookmarked, setIsBookmarked] = useState(false);  // State to track if the product is bookmarked
+  const { products } = route.params || {}; 
+  const [isBookmarked, setIsBookmarked] = useState(false);  
 
   useEffect(() => {
-    // Check if the product is already bookmarked
     const checkIfFavorite = async () => {
       const savedFavorites = await AsyncStorage.getItem('favorites');
       const favorites = savedFavorites ? JSON.parse(savedFavorites) : [];
@@ -19,18 +18,18 @@ const ProductDetails = ({ navigation, route }) => {
       setIsBookmarked(isProductFavorite);
     };
 
-    checkIfFavorite();  // Call the function to check favorites
-  }, [products?.id]);  // Run this effect whenever the product's id changes
+    checkIfFavorite();
+  }, [products?.id]);  
 
   const onBackPress = () => {
-    navigation.goBack();  // Navigate back to the previous screen
+    navigation.goBack(); 
   };
 
   const onContact = () => {
     let phone = 'real phone number';
-    Linking.openURL(`tel:${phone}`);  // Open phone dialer
+    Linking.openURL(`tel:${phone}`);  
     let email = 'real email';
-    Linking.openURL(`mailto:${email}`);  // Open email client
+    Linking.openURL(`mailto:${email}`);  
   };
 
   const toggleBookmark = async () => {
@@ -38,24 +37,22 @@ const ProductDetails = ({ navigation, route }) => {
     savedFavorites = savedFavorites ? JSON.parse(savedFavorites) : [];
 
     if (isBookmarked) {
-      // If already bookmarked, remove it from the list
       savedFavorites = savedFavorites.filter(item => item.id !== products?.id);
     } else {
-      // If not bookmarked, add it to the list
       savedFavorites.push(products);
     }
 
-    setIsBookmarked(!isBookmarked);  // Toggle the bookmark state
-    await AsyncStorage.setItem('favorites', JSON.stringify(savedFavorites));  // Persist to AsyncStorage
+    setIsBookmarked(!isBookmarked);  
+    await AsyncStorage.setItem('favorites', JSON.stringify(savedFavorites));  
   };
 
   return (
     <SafeAreaView style={styles.save}>
       <ScrollView style={styles.container}>
         {products?.images?.length ? (
-          <ImageCarousel images={products?.images} />  // Use carousel if there are multiple images
+          <ImageCarousel images={products?.images} />  
         ) : (
-          <Image style={styles.image} source={{ uri: products?.image }} />  // Single image if no carousel
+          <Image style={styles.image} source={{ uri: products?.image }} /> 
         )}
         <View style={styles.content}>
           <Text style={styles.title}>{products?.title}</Text>
@@ -72,8 +69,8 @@ const ProductDetails = ({ navigation, route }) => {
             style={styles.bookmarkIcon}
             source={
               isBookmarked
-                ? require('@/assets/tabs/bookmark_active.png')  // Active bookmark icon if bookmarked
-                : require('@/assets/tabs/bookmark.png')  // Inactive bookmark icon if not bookmarked
+                ? require('@/assets/tabs/bookmark_active.png') 
+                : require('@/assets/tabs/bookmark.png')  
             }
           />
         </Pressable>

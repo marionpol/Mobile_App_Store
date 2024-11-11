@@ -1,6 +1,6 @@
 import  { StyleSheet } from 'react-native'
 import { Colors } from '../../constants/colors'
-import CategoryBox from '@/components/CategoryBox'
+
 
 export const styles = StyleSheet.create({
     container: {

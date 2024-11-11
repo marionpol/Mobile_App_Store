@@ -16,7 +16,6 @@ const Settings = () => {
     }
 
     const onEditPress = () => {
-        console.log(editing)
         setEditing(true)
     }
 
