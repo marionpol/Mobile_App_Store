@@ -80,7 +80,21 @@ export const getCurrentUser = async () => {
     }
 }
 
-
+export const updateUser = async (userId, updatedData) => {
+    try {
+        const updatedUser = await databases.updateDocument(
+            databaseId,
+            userCollectionId,
+            userId,
+            updatedData
+        );
+        console.log("User document updated:", updatedUser);
+        return updatedUser;
+    } catch (error) {
+        console.error("Error updating user:", error);
+        throw new Error(error.message || "Failed to update user");
+    }
+};
 
 
 export const logOut = async () => {
