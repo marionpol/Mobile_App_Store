@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "./styles";
@@ -6,8 +6,10 @@ import Header from "@/components/Header";
 import ListItem from "@/components/ListItem";
 import Button from "@/components/Button";
 import { logOut, getCurrentUser } from "@/appwrite/appwrite";
+import { UserContext } from "@/context/usercontext"
 
-const Profile = ({ navigation, setIsAuthenticated }) => {
+const Profile = ({ navigation }) => {
+    const { setIsAuthenticated } = useContext(UserContext);  
     const num = 10;
 
     const onLogout = async () => {
@@ -21,10 +23,8 @@ const Profile = ({ navigation, setIsAuthenticated }) => {
             }
 
             await logOut();
-            console.log('User logged out successfully');
 
-            // Use the setIsAuthenticated prop
-            setIsAuthenticated(false);
+            setIsAuthenticated(false); 
             navigation.navigate('Splash'); 
         } catch (error) {
             console.error('Logout error:', error);

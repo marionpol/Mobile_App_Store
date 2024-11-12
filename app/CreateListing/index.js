@@ -32,7 +32,6 @@ const CreateListing = ({navigation}) => {
         setImages(list => [...list, ...result.assets])
         setLoading(false);
         }
-        console.log(images)
     }
 
     const onDeleteImage = (image) => {

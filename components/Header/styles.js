@@ -6,7 +6,8 @@ export const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        backgroundColor: Colors.white
     },
     title: {
         color: Colors.black,

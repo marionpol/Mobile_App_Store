@@ -16,9 +16,21 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ProductDetails from './ProductDetails';
 import { getCurrentUser } from '@/appwrite/appwrite';
+import { UserContext } from '@/context/usercontext';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+
+const ProfileStack = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Profile" component={Profile} options={{headerShown: false}} />
+            <Stack.Screen name="Settings" component={Settings} options={{headerShown: false}} />
+            <Stack.Screen name="CreateListing" component={CreateListing} options={{headerShown: false}} />
+        </Stack.Navigator>
+    )
+}
 
 const Tabs = ({ setIsAuthenticated }) => {
     return (
@@ -34,7 +46,7 @@ const Tabs = ({ setIsAuthenticated }) => {
                         icon = focused
                             ? require('@/assets/tabs/bookmark_active.png')
                             : require('@/assets/tabs/bookmark.png');
-                    } else if (route.name === "Profile") {
+                    } else if (route.name === "ProfileTab") { // Renamed here
                         icon = focused
                             ? require('@/assets/tabs/profile_active.png')
                             : require('@/assets/tabs/profile.png');
@@ -48,12 +60,11 @@ const Tabs = ({ setIsAuthenticated }) => {
         >
             <Tab.Screen name="Home" component={Home} />
             <Tab.Screen name="Favorites" component={Favorites} />
-            <Tab.Screen name="Profile">
-                {(props) => <Profile {...props} setIsAuthenticated={setIsAuthenticated} />}
-            </Tab.Screen>
+            <Tab.Screen name="ProfileTab" component={ProfileStack} /> 
         </Tab.Navigator>
     );
 };
+
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -78,34 +89,34 @@ const App = () => {
 
     return (
         <SafeAreaProvider>
-            <Stack.Navigator 
-                screenOptions={{
-                    contentStyle: { backgroundColor: theme.colors.background },
-                    headerShown: false 
-                }}>
-                {isAuthenticated ? (
-                    <>
-                        <Stack.Screen name="Tabs">
-                            {(props) => <Tabs {...props} setIsAuthenticated={setIsAuthenticated} />}
-                        </Stack.Screen>
-                        <Stack.Screen name="ProductDetails" component={ProductDetails} />
-                        <Stack.Screen name="Settings" component={Settings} />
-                        <Stack.Screen name="CreateListing" component={CreateListing} />
-                    </>
-                ) : (
-                    <>
-                        <Stack.Screen name="Splash" component={Splash} />
-                        <Stack.Screen name="Signup">
-                        {(props) => <Signup {...props} setIsAuthenticated={setIsAuthenticated} />}
-                        </Stack.Screen>
-                        <Stack.Screen name="Signin">
-                            {(props) => <Signin {...props} onSignInSuccess={handleSignInSuccess} />}
-                        </Stack.Screen>
-                    </>
-                )}
-            </Stack.Navigator>
+            <UserContext.Provider value={{ setIsAuthenticated }}>
+                <Stack.Navigator
+                    screenOptions={{
+                        contentStyle: { backgroundColor: theme.colors.background },
+                        headerShown: false,
+                    }}
+                >
+                    {isAuthenticated ? (
+                        <>
+                            <Stack.Screen name="Tabs" component={Tabs} />
+                            <Stack.Screen name="ProductDetails" component={ProductDetails} />
+                        </>
+                    ) : (
+                        <>
+                            <Stack.Screen name="Splash" component={Splash} />
+                            <Stack.Screen name="Signup">
+                                {(props) => <Signup {...props} setIsAuthenticated={setIsAuthenticated} />}
+                            </Stack.Screen>
+                            <Stack.Screen name="Signin">
+                                {(props) => <Signin {...props} onSignInSuccess={handleSignInSuccess} />}
+                            </Stack.Screen>
+                        </>
+                    )}
+                </Stack.Navigator>
+            </UserContext.Provider>
         </SafeAreaProvider>
     );
 };
+
 
 export default React.memo(App);
