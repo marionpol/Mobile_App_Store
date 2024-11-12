@@ -5,10 +5,10 @@ React Native + Appwrite + Expo
 This is a mobile app which is made with React Native and Expo. It also uses appwrite databases for making accounts.
 In this app you can create an account, check listings, categorize them and also add your own listings.
 
-1. Install dependencies
+1. Clone the repository and install dependencies
 
    ```bash
-   npm init -y
+   git clone https://github.com/marionpol/Mobile_App_Store
    ```
    ```bash
    npm install
@@ -36,7 +36,7 @@ Create a database with an account table which has the username, email and passwo
 
 4. Improvements
 
-Currently the google login doesnt function at all since I haven't found a viable solution for it to work properly.
+Currently the google login doesnt function at all since I haven't found a viable solution for it to work properly. Also adding a new listing isn't functional as of now (it isnt connected to the appwrite database).
 
 
 
