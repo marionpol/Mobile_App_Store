@@ -63,7 +63,6 @@ export const getCurrentUser = async () => {
     try {
         const currentAccount = await account.get();
 
-        if (!currentAccount) throw new Error('No user account found.');
 
         const currentUser = await databases.listDocuments(databaseId, userCollectionId,
             [Query.equal('accountId', currentAccount.$id)]);

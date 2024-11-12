@@ -46,7 +46,7 @@ const Tabs = ({ setIsAuthenticated }) => {
                         icon = focused
                             ? require('@/assets/tabs/bookmark_active.png')
                             : require('@/assets/tabs/bookmark.png');
-                    } else if (route.name === "ProfileTab") { // Renamed here
+                    } else if (route.name === "ProfileTab") { 
                         icon = focused
                             ? require('@/assets/tabs/profile_active.png')
                             : require('@/assets/tabs/profile.png');

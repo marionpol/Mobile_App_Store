@@ -13,7 +13,6 @@ const Home = ({ navigation }) => {
     const [keyword, setKeyword] = useState();
     const [selectedProducts, setSelectedProducts] = useState(products);
 
-    // Update selectedProducts whenever selectedCategory or keyword changes
     useEffect(() => {
         if (selectedCategory && !keyword) {
             const updatedSelectedProducts = products.filter(
@@ -35,7 +34,7 @@ const Home = ({ navigation }) => {
         } else if (!keyword && !selectedCategory) {
             setSelectedProducts(products);
         }
-    }, [selectedCategory, keyword]); // Add 'keyword' to dependencies
+    }, [selectedCategory, keyword]);
 
     const [numColumns, setNumColumns] = useState(2);
 
@@ -66,7 +65,7 @@ const Home = ({ navigation }) => {
                     showSearch={true}
                     title="Find all you need"
                 />
-                <View style={styles.categoryBox}>
+                <View style={styles.CategoryBox}>
                 <FlatList
                     showsHorizontalScrollIndicator={false}
                     style={styles.list}
