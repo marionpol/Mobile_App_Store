@@ -22,7 +22,7 @@ const Header = ({title, onBackPress, onLogout, showBack, showSearch, onSearchKey
                 <Pressable hitSlop={20} onPress={onSearch}>
                     <Image style={styles.icon} source={require('@/assets/images/search.png')}/>
                 </Pressable>
-             ) : null
+             ) :<View style={styles.space}/>
             }
             <Text style={styles.title}>{title}</Text>
             {
